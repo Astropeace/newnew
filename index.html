@@ -253,6 +253,8 @@ right: 10px;
 }
 }
 </style>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
 </head>
 <body class="bg-gray-50">
 <div class="fixed top-0 left-0 right-0 z-50 bg-primary text-white py-2 text-center">
@@ -286,24 +288,32 @@ Cart
 </div>
 </header>
 <!-- Hero Section -->
-<section id="portfolio" class="relative min-h-screen flex items-center pt-24" style="background-image: url('https://readdy.ai/api/search-image?query=professional%20photography%20studio%20interior%2C%20modern%20minimalist%20design%2C%20soft%20ambient%20lighting%2C%20camera%20equipment%2C%20artistic%20atmosphere%2C%20high-end%20photography%20environment%2C%20cinematic%20mood%2C%20high%20resolution%2C%20photorealistic&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
-<div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
-<div class="container mx-auto px-6 relative z-10">
-<div class="max-w-2xl">
-<h1 class="font-playfair text-5xl md:text-6xl font-bold text-white leading-tight mb-6">Capturing Life's Beautiful Moments</h1>
-<p class="font-opensans text-lg text-gray-100 mb-8">Professional photography services for your most precious memories. From intimate portraits to grand celebrations.</p>
-<div class="flex flex-wrap gap-4">
-<a href="#gallery" class="bg-primary text-white px-8 py-3 font-opensans font-medium !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors inline-flex items-center">
-View Portfolio
-<i class="ri-arrow-right-line ri-lg ml-2"></i>
-</a>
-<a href="#calendly" class="bg-white/20 backdrop-blur text-white px-8 py-3 font-opensans font-medium !rounded-button whitespace-nowrap hover:bg-white/30 transition-colors inline-flex items-center">
-Book a Session
-<i class="ri-calendar-line ri-lg ml-2"></i>
-</a>
-</div>
-</div>
-</div>
+<section id="hero" class="relative min-h-screen flex items-center pt-24" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47a0478938c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+  <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-2xl">
+      <span class="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-opensans mb-4">Limited Time Offers</span>
+      <h1 class="font-playfair text-5xl md:text-6xl font-bold text-white leading-tight mb-6">This Week's Special Deals</h1>
+      <p class="font-opensans text-lg text-gray-100 mb-8">Exclusive weekly selections at unbeatable prices. New deals every Monday!</p>
+      <div class="flex items-center gap-4 text-gray-100 mb-8">
+        <div class="flex items-center">
+          <i class="ri-timer-line ri-lg mr-2"></i>
+          <span class="font-opensans" id="hero-countdown">Time remaining: Loading...</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="#limited-prints" class="bg-primary text-white px-8 py-3 font-opensans font-medium !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors inline-flex items-center">
+          View Limited Edition Prints
+          <i class="ri-arrow-right-line ri-lg ml-2"></i>
+        </a>
+        <a href="#portfolio" class="bg-white/20 backdrop-blur text-white px-8 py-3 font-opensans font-medium !rounded-button whitespace-nowrap hover:bg-white/30 transition-colors inline-flex items-center">
+          View Portfolio
+          <i class="ri-gallery-line ri-lg ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Limited Edition Prints Section -->
 <section id="limited-prints" class="py-20 bg-gray-100">
 <div class="container mx-auto px-6">
@@ -314,7 +324,7 @@ Book a Session
 <div class="flex items-center gap-4 justify-center mt-6 text-gray-700">
 <div class="flex items-center">
 <i class="ri-timer-line ri-lg mr-2"></i>
-<span class="font-opensans" id="countdown">Time remaining: Loading...</span>
+<span class="font-opensans" id="countdown-timer">Time remaining: Loading...</span>
 </div>
 </div>
 </div>
@@ -322,7 +332,7 @@ Book a Session
 <!-- Print 1 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
 <div class="relative aspect-[4/3]">
-<img src="https://readdy.ai/api/search-image?query=dramatic%20landscape%20photography%20of%20misty%20mountains%20at%20sunrise%2C%20ethereal%20atmosphere%2C%20golden%20light%20filtering%20through%20clouds%2C%20professional%20nature%20photography%2C%20cinematic%20composition%2C%20high%20resolution%20print%20quality&width=1200&height=900&seq=21&orientation=landscape" alt="Mountain Majesty" class="w-full h-full object-cover">
+<img src="https://images.unsplash.com/photo-144197423157e-5c4f686ecd9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="Mountain Majesty" class="w-full h-full object-cover">
 <div class="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-full font-opensans text-sm">
 <span class="stock-counter" data-stock="7">7 prints remaining</span>
 </div>
@@ -346,7 +356,7 @@ Add to Cart
 <!-- Print 2 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
 <div class="relative aspect-[4/3]">
-<img src="https://readdy.ai/api/search-image?query=minimalist%20seascape%20at%20twilight%2C%20long%20exposure%20ocean%20waves%2C%20ethereal%20atmosphere%2C%20professional%20fine%20art%20photography%2C%20muted%20tones%2C%20peaceful%20composition%2C%20high%20resolution%20print%20quality&width=1200&height=900&seq=22&orientation=landscape" alt="Ocean Serenity" class="w-full h-full object-cover">
+<img src="https://images.unsplash.com/photo-1496200130635-2910183073ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="Ocean Serenity" class="w-full h-full object-cover">
 <div class="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-full font-opensans text-sm">
 <span class="stock-counter" data-stock="4">4 prints remaining</span>
 </div>
@@ -370,7 +380,7 @@ Add to Cart
 <!-- Print 3 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
 <div class="relative aspect-[4/3]">
-<img src="https://readdy.ai/api/search-image?query=abstract%20architectural%20photography%2C%20modern%20building%20details%20in%20black%20and%20white%2C%20geometric%20patterns%2C%20dramatic%20shadows%2C%20professional%20fine%20art%20photography%2C%20minimalist%20composition%2C%20high%20resolution%20print%20quality&width=1200&height=900&seq=23&orientation=landscape" alt="Urban Geometry" class="w-full h-full object-cover">
+<img src="https://images.unsplash.com/photo-1508351597283-bca74039b5ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="Urban Geometry" class="w-full h-full object-cover">
 <div class="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-full font-opensans text-sm">
 <span class="stock-counter" data-stock="3">3 prints remaining</span>
 </div>
@@ -394,7 +404,7 @@ Add to Cart
 <!-- Print 4 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
 <div class="relative aspect-[4/3]">
-<img src="https://readdy.ai/api/search-image?query=wildlife%20photography%2C%20majestic%20lion%20portrait%20in%20black%20and%20white%2C%20dramatic%20lighting%2C%20intimate%20close-up%2C%20professional%20fine%20art%20photography%2C%20powerful%20composition%2C%20high%20resolution%20print%20quality&width=1200&height=900&seq=24&orientation=landscape" alt="King's Gaze" class="w-full h-full object-cover">
+<img src="https://images.unsplash.com/photo-1547721020-58ec9866b511?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="King's Gaze" class="w-full h-full object-cover">
 <div class="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-full font-opensans text-sm">
 <span class="stock-counter" data-stock="5">5 prints remaining</span>
 </div>
@@ -418,7 +428,7 @@ Add to Cart
 <!-- Print 5 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
 <div class="relative aspect-[4/3]">
-<img src="https://readdy.ai/api/search-image?query=aerial%20landscape%20photography%2C%20abstract%20patterns%20of%20colorful%20salt%20flats%2C%20natural%20geometry%2C%20professional%20fine%20art%20photography%2C%20vibrant%20colors%2C%20unique%20perspective%2C%20high%20resolution%20print%20quality&width=1200&height=900&seq=25&orientation=landscape" alt="Earth's Canvas" class="w-full h-full object-cover">
+<img src="https://images.unsplash.com/photo-1546953033-91c85713c994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="Earth's Canvas" class="w-full h-full object-cover">
 <div class="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-full font-opensans text-sm">
 <span class="stock-counter" data-stock="6">6 prints remaining</span>
 </div>
@@ -442,7 +452,7 @@ Add to Cart
 <!-- Product Card 1 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
 <div class="relative">
-<img src="https://readdy.ai/api/search-image?query=premium%20organic%20coffee%20beans%20in%20elegant%20packaging%2C%20minimalist%20design%2C%20soft%20lighting%2C%20luxury%20product%20photography%2C%20neutral%20background%2C%20high-end%20retail%20presentation%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=10&orientation=landscape" alt="Premium Coffee Blend" class="w-full h-64 object-cover">
+<img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Premium Coffee Blend" class="w-full h-64 object-cover">
 <div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-opensans">
 Save 30%
 </div>
@@ -465,7 +475,7 @@ Add to Cart
 <!-- Product Card 2 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
 <div class="relative">
-<img src="https://readdy.ai/api/search-image?query=luxury%20scented%20candle%20in%20elegant%20glass%20jar%2C%20minimalist%20packaging%2C%20warm%20ambient%20lighting%2C%20premium%20home%20fragrance%20product%2C%20neutral%20background%2C%20high-end%20retail%20presentation%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=11&orientation=landscape" alt="Luxury Candle" class="w-full h-64 object-cover">
+<img src="https://images.unsplash.com/photo-1584282344566-d42489634360?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Luxury Candle" class="w-full h-64 object-cover">
 <div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-opensans">
 Save 25%
 </div>
@@ -488,7 +498,7 @@ Add to Cart
 <!-- Product Card 3 -->
 <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
 <div class="relative">
-<img src="https://readdy.ai/api/search-image?query=premium%20leather%20wallet%20in%20minimalist%20design%2C%20luxury%20leather%20goods%2C%20professional%20product%20photography%2C%20neutral%20background%2C%20high-end%20retail%20presentation%2C%20detailed%20craftsmanship%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=12&orientation=landscape" alt="Leather Wallet" class="w-full h-64 object-cover">
+<img src="https://images.unsplash.com/photo-1557577834-b9129e95b742?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Leather Wallet" class="w-full h-64 object-cover">
 <div class="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-opensans">
 Save 20%
 </div>
@@ -554,14 +564,14 @@ Proceed to Checkout
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
 <!-- Portrait Images -->
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="portrait">
-<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20photography%20of%20a%20young%20woman%20with%20soft%20natural%20lighting%2C%20shallow%20depth%20of%20field%2C%20neutral%20background%2C%20elegant%20pose%2C%20high%20fashion%20styling%2C%20cinematic%20color%20grading%2C%20high%20resolution%2C%20photorealistic&width=800&height=1000&seq=2&orientation=portrait" alt="Portrait Photography" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1503104834682-66a2c3bca730?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Portrait Photography" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Elegant Portrait</h3>
 <p class="font-opensans text-sm text-gray-200">Natural light portrait session</p>
 </div>
 </div>
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="portrait">
-<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20photography%20of%20a%20business%20executive%20in%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background%2C%20professional%20lighting%2C%20confident%20pose%2C%20high%20resolution%2C%20photorealistic&width=800&height=1000&seq=3&orientation=portrait" alt="Corporate Portrait" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Corporate Portrait" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Corporate Headshot</h3>
 <p class="font-opensans text-sm text-gray-200">Professional business portrait</p>
@@ -569,14 +579,14 @@ Proceed to Checkout
 </div>
 <!-- Wedding Images -->
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="wedding">
-<img src="https://readdy.ai/api/search-image?query=elegant%20wedding%20photography%2C%20bride%20and%20groom%20during%20golden%20hour%2C%20romantic%20moment%2C%20soft%20backlight%2C%20beautiful%20scenery%2C%20cinematic%20composition%2C%20emotional%20moment%2C%20high%20resolution%2C%20photorealistic&width=800&height=1000&seq=4&orientation=portrait" alt="Wedding Photography" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e1c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Wedding Photography" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Golden Hour Romance</h3>
 <p class="font-opensans text-sm text-gray-200">Summer wedding at vineyard estate</p>
 </div>
 </div>
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="wedding">
-<img src="https://readdy.ai/api/search-image?query=wedding%20detail%20photography%2C%20close-up%20of%20wedding%20rings%20on%20flowers%2C%20macro%20photography%2C%20soft%20focus%20background%2C%20artistic%20composition%2C%20elegant%20styling%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=5&orientation=landscape" alt="Wedding Details" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1515871204537-49a5ebd485d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Wedding Details" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Precious Details</h3>
 <p class="font-opensans text-sm text-gray-200">Wedding day macro photography</p>
@@ -584,14 +594,14 @@ Proceed to Checkout
 </div>
 <!-- Nature Images -->
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="nature">
-<img src="https://readdy.ai/api/search-image?query=breathtaking%20landscape%20photography%2C%20mountain%20range%20at%20sunrise%2C%20dramatic%20clouds%2C%20vibrant%20colors%2C%20wide%20angle%20perspective%2C%20crisp%20details%2C%20mist%20in%20valley%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=6&orientation=landscape" alt="Landscape Photography" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Landscape Photography" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Mountain Majesty</h3>
 <p class="font-opensans text-sm text-gray-200">Alpine sunrise landscape</p>
 </div>
 </div>
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="nature">
-<img src="https://readdy.ai/api/search-image?query=macro%20nature%20photography%2C%20detailed%20close-up%20of%20a%20dew%20drop%20on%20a%20leaf%2C%20morning%20light%2C%20vibrant%20green%2C%20shallow%20depth%20of%20field%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=7&orientation=landscape" alt="Macro Nature" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1500408817578-b2f361bfdc1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Macro Nature" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Morning Dew</h3>
 <p class="font-opensans text-sm text-gray-200">Macro nature photography</p>
@@ -599,14 +609,14 @@ Proceed to Checkout
 </div>
 <!-- Event Images -->
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="event">
-<img src="https://readdy.ai/api/search-image?query=concert%20photography%2C%20live%20music%20performance%2C%20stage%20lighting%2C%20dramatic%20angles%2C%20crowd%20atmosphere%2C%20dynamic%20composition%2C%20high%20energy%20moment%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=8&orientation=landscape" alt="Concert Photography" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Concert Photography" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Live Performance</h3>
 <p class="font-opensans text-sm text-gray-200">Concert photography</p>
 </div>
 </div>
 <div class="gallery-item rounded-lg overflow-hidden shadow-md" data-category="event">
-<img src="https://readdy.ai/api/search-image?query=corporate%20event%20photography%2C%20business%20conference%2C%20professional%20setting%2C%20candid%20moment%2C%20networking%2C%20clean%20composition%2C%20professional%20lighting%2C%20high%20resolution%2C%20photorealistic&width=800&height=600&seq=9&orientation=landscape" alt="Corporate Event" class="w-full h-80 object-cover object-top">
+<img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Corporate Event" class="w-full h-80 object-cover object-top">
 <div class="gallery-overlay">
 <h3 class="font-playfair text-xl text-white">Business Conference</h3>
 <p class="font-opensans text-sm text-gray-200">Corporate event coverage</p>
@@ -640,7 +650,7 @@ Proceed to Checkout
 <div class="container mx-auto px-6">
 <div class="flex flex-col md:flex-row gap-12 items-center">
 <div class="md:w-1/2">
-<img src="https://readdy.ai/api/search-image?query=professional%20photographer%20portrait%2C%20artistic%20self-portrait%20of%20photographer%20with%20camera%2C%20creative%20lighting%2C%20neutral%20studio%20background%2C%20confident%20pose%2C%20high-end%20camera%20equipment%2C%20professional%20attire%2C%20high%20resolution%2C%20photorealistic&width=800&height=1000&seq=10&orientation=portrait" alt="Photographer Portrait" class="w-full h-auto rounded-lg shadow-lg">
+<img src="https://images.unsplash.com/photo-1579532536935-619928decd04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Photographer Portrait" class="w-full h-auto rounded-lg shadow-lg">
 </div>
 <div class="md:w-1/2">
 <h2 class="font-playfair text-4xl font-bold mb-6">About Me</h2>
@@ -800,24 +810,35 @@ Proceed to Checkout
 </div>
 </footer>
 <script>
-// Initialize Stripe
-const stripe = Stripe('your_publishable_key'); // Replace with your actual publishable key
+// Initialize Stripe (will only be used when backend is connected)
+// Using a try-catch to prevent errors in case Stripe isn't loaded properly
+let stripe;
+try {
+  stripe = Stripe('your_publishable_key'); // Replace with your actual publishable key
+} catch (error) {
+  console.warn('Stripe initialization failed:', error);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 // Stock management
 function updateStock(printId) {
-const stockCounter = document.querySelector(`[data-id="${printId}"]`).closest('.bg-white').querySelector('.stock-counter');
-let currentStock = parseInt(stockCounter.getAttribute('data-stock'));
-if (currentStock > 0) {
-currentStock--;
-stockCounter.setAttribute('data-stock', currentStock);
-stockCounter.textContent = `${currentStock} prints remaining`;
-if (currentStock === 0) {
-const addToCartButton = document.querySelector(`[data-id="${printId}"]`);
-addToCartButton.disabled = true;
-addToCartButton.classList.add('opacity-50', 'cursor-not-allowed');
-addToCartButton.textContent = 'Sold Out';
-}
-}
+  const button = document.querySelector(`[data-id="${printId}"]`);
+  if (!button) return;
+  
+  const stockCounter = button.closest('.bg-white')?.querySelector('.stock-counter');
+  if (!stockCounter) return;
+  
+  let currentStock = parseInt(stockCounter.getAttribute('data-stock'));
+  if (currentStock > 0) {
+    currentStock--;
+    stockCounter.setAttribute('data-stock', currentStock);
+    stockCounter.textContent = `${currentStock} prints remaining`;
+    if (currentStock === 0) {
+      button.disabled = true;
+      button.classList.add('opacity-50', 'cursor-not-allowed');
+      button.textContent = 'Sold Out';
+    }
+  }
 }
 // Cart functionality
 let cart = [];
@@ -828,28 +849,44 @@ const cartSubtotal = document.getElementById('cart-subtotal');
 const checkoutButton = document.getElementById('checkout-button');
 // Update countdown timer
 function updateCountdown() {
-const now = new Date();
-const nextMonday = new Date();
-nextMonday.setDate(nextMonday.getDate() + (8 - nextMonday.getDay()));
-nextMonday.setHours(9, 0, 0, 0);
-const timeLeft = nextMonday - now;
-const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-document.getElementById('countdown').textContent =
-`Time remaining: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const countdownElements = document.querySelectorAll('#hero-countdown, #countdown-timer');
+  if (countdownElements.length === 0) return;
+  
+  const now = new Date();
+  const nextMonday = new Date();
+  nextMonday.setDate(nextMonday.getDate() + (8 - nextMonday.getDay()));
+  nextMonday.setHours(9, 0, 0, 0);
+  const timeLeft = nextMonday - now;
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  
+  countdownElements.forEach(element => {
+    if (element) {
+      element.textContent = `Time remaining: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+  });
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
 // Toggle cart sidebar
-document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
-e.preventDefault();
-cartSidebar.classList.remove('translate-x-full');
-});
-document.getElementById('close-cart').addEventListener('click', function() {
-cartSidebar.classList.add('translate-x-full');
-});
+const cartLink = document.querySelector('a[href="#cart"]');
+if (cartLink) {
+  cartLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (cartSidebar) {
+      cartSidebar.classList.remove('translate-x-full');
+    }
+  });
+}
+
+const closeCartBtn = document.getElementById('close-cart');
+if (closeCartBtn && cartSidebar) {
+  closeCartBtn.addEventListener('click', function() {
+    cartSidebar.classList.add('translate-x-full');
+  });
+}
 // Add to cart functionality
 document.querySelectorAll('.add-to-cart').forEach(button => {
 button.addEventListener('click', function() {
@@ -873,7 +910,10 @@ cart.forEach(item => {
 updateStock(item.id);
 });
 // Update cart items
-cartItems.innerHTML = cart.map(item => `
+if (cartItems) {
+  cartItems.innerHTML = cart.length === 0 
+    ? '<p class="text-center text-gray-500 my-8">Your cart is empty</p>' 
+    : cart.map(item => `
 <div class="flex items-center justify-between mb-4">
 <div>
 <h4 class="font-opensans font-medium">${item.name}</h4>
@@ -895,12 +935,19 @@ cartItems.innerHTML = cart.map(item => `
 </div>
 </div>
 `).join('');
+}
+
 // Update subtotal
 const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+if (cartSubtotal) {
+  cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+}
+
 // Enable/disable checkout button
-checkoutButton.disabled = cart.length === 0;
-checkoutButton.classList.toggle('opacity-50', cart.length === 0);
+if (checkoutButton) {
+  checkoutButton.disabled = cart.length === 0;
+  checkoutButton.classList.toggle('opacity-50', cart.length === 0);
+}
 }
 // Make these functions available globally
 window.updateQuantity = function(id, newQuantity) {
@@ -919,31 +966,40 @@ cart = cart.filter(item => item.id !== id);
 updateCart();
 };
 // Handle checkout
-checkoutButton.addEventListener('click', async function() {
-try {
-const response = await fetch('/create-checkout-session', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify({
-items: cart.map(item => ({
-id: item.id,
-quantity: item.quantity
-}))
-})
-});
-const session = await response.json();
-const result = await stripe.redirectToCheckout({
-sessionId: session.id
-});
-if (result.error) {
-console.error(result.error);
+if (checkoutButton) {
+  checkoutButton.addEventListener('click', async function() {
+    try {
+      // In development mode, just show an alert
+      if (!stripe) {
+        alert('Checkout would connect to Stripe in production.');
+        return;
+      }
+      
+      const response = await fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cart.map(item => ({
+            id: item.id,
+            quantity: item.quantity
+          }))
+        })
+      });
+      const session = await response.json();
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id
+      });
+      if (result.error) {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Checkout process would continue in production environment.');
+    }
+  });
 }
-} catch (error) {
-console.error('Error:', error);
-}
-});
 // Header scroll effect
 const header = document.getElementById('header');
 window.addEventListener('scroll', function() {
@@ -956,46 +1012,53 @@ header.classList.remove('bg-white', 'shadow-md');
 // Mobile menu toggle
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
-menuToggle.addEventListener('click', function() {
-mobileMenu.classList.toggle('hidden');
-});
-// Close mobile menu when clicking on a link
-const mobileLinks = mobileMenu.querySelectorAll('a');
-mobileLinks.forEach(link => {
-link.addEventListener('click', function() {
-mobileMenu.classList.add('hidden');
-});
-});
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener('click', function() {
+    mobileMenu.classList.toggle('hidden');
+  });
+  // Close mobile menu when clicking on a link
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+}
 });
 document.addEventListener('DOMContentLoaded', function() {
 // Portfolio gallery filtering
 const filterButtons = document.querySelectorAll('.filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
-filterButtons.forEach(button => {
-button.addEventListener('click', function() {
-// Remove active class from all buttons
-filterButtons.forEach(btn => btn.classList.remove('active'));
-// Add active class to clicked button
-this.classList.add('active');
-const category = this.getAttribute('data-category');
-// Show/hide gallery items based on category
-galleryItems.forEach(item => {
-if (category === 'all' || item.getAttribute('data-category') === category) {
-item.style.display = 'block';
-} else {
-item.style.display = 'none';
+if (filterButtons.length && galleryItems.length) {
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove active class from all buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      this.classList.add('active');
+      const category = this.getAttribute('data-category');
+      // Show/hide gallery items based on category
+      galleryItems.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
 }
-});
-});
-});
-// Lightbox functionality
-const galleryGrid = document.getElementById('gallery-grid');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.querySelector('.lightbox-img');
-const lightboxClose = document.querySelector('.lightbox-close');
-const lightboxPrev = document.querySelector('.lightbox-prev');
-const lightboxNext = document.querySelector('.lightbox-next');
-let currentIndex = 0;
+  
+  // Lightbox functionality
+  const galleryGrid = document.getElementById('gallery-grid');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.querySelector('.lightbox-img');
+  const lightboxClose = document.querySelector('.lightbox-close');
+  const lightboxPrev = document.querySelector('.lightbox-prev');
+  const lightboxNext = document.querySelector('.lightbox-next');
+  let currentIndex = 0;
+
+  if (galleryItems.length && lightbox && lightboxImg) {
 const visibleImages = () => Array.from(galleryItems).filter(item => item.style.display !== 'none');
 galleryItems.forEach(item => {
 item.addEventListener('click', function() {
@@ -1005,43 +1068,59 @@ lightboxImg.alt = img.alt;
 lightbox.style.display = 'flex';
 // Set current index
 currentIndex = visibleImages().indexOf(this);
-});
-});
-lightboxClose.addEventListener('click', function() {
-lightbox.style.display = 'none';
-});
-lightboxPrev.addEventListener('click', function() {
-const images = visibleImages();
-currentIndex = (currentIndex - 1 + images.length) % images.length;
-const img = images[currentIndex].querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-});
-lightboxNext.addEventListener('click', function() {
-const images = visibleImages();
-currentIndex = (currentIndex + 1) % images.length;
-const img = images[currentIndex].querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-});
-// Close lightbox when clicking outside the image
-lightbox.addEventListener('click', function(e) {
-if (e.target === lightbox) {
-lightbox.style.display = 'none';
-}
-});
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', function(e) {
-if (lightbox.style.display === 'flex') {
-if (e.key === 'Escape') {
-lightbox.style.display = 'none';
-} else if (e.key === 'ArrowLeft') {
-lightboxPrev.click();
-} else if (e.key === 'ArrowRight') {
-lightboxNext.click();
-}
-}
-});
+  });
+  });
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', function() {
+      lightbox.style.display = 'none';
+    });
+  }
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', function() {
+      const images = visibleImages();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      const img = images[currentIndex].querySelector('img');
+      if (img) {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+      }
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', function() {
+      const images = visibleImages();
+      currentIndex = (currentIndex + 1) % images.length;
+      const img = images[currentIndex].querySelector('img');
+      if (img) {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+      }
+    });
+  }
+
+  // Close lightbox when clicking outside the image
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  });
+
+  // Keyboard navigation for lightbox
+  document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+      if (e.key === 'Escape') {
+        lightbox.style.display = 'none';
+      } else if (e.key === 'ArrowLeft' && lightboxPrev) {
+        lightboxPrev.click();
+      } else if (e.key === 'ArrowRight' && lightboxNext) {
+        lightboxNext.click();
+      }
+    }
+    });
+  }
 });
 document.addEventListener('DOMContentLoaded', function() {
 // Booking form steps navigation
@@ -1172,5 +1251,3 @@ goToStep(1);
 </script>
 </body>
 </html>
-
-<script src="js/main.js"></script>
