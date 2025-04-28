@@ -521,27 +521,124 @@ async function loadFeaturedProducts() {
  * Check authentication status
  */
 async function checkAuthStatus() {
+  console.log('MAIN - Checking authentication status');
   const authToken = localStorage.getItem('authToken');
   
   if (authToken) {
+    console.log('MAIN - Auth token found in localStorage');
+    
+    // Add token decoding to check expiration without server call
+    try {
+      const tokenParts = authToken.split('.');
+      if (tokenParts.length === 3) {
+        const payload = JSON.parse(atob(tokenParts[1]));
+        const expiry = payload.exp ? new Date(payload.exp * 1000) : null;
+        const now = new Date();
+        
+        console.log('MAIN - Token details:', {
+          userId: payload.id,
+          userRole: payload.role,
+          issuedAt: payload.iat ? new Date(payload.iat * 1000).toISOString() : 'unknown',
+          expiresAt: expiry ? expiry.toISOString() : 'unknown',
+          isExpired: expiry ? now > expiry : 'unknown',
+          timeUntilExpiry: expiry ? `${Math.floor((expiry - now) / 60000)} minutes` : 'unknown'
+        });
+        
+        if (expiry && now > expiry) {
+          console.warn('MAIN - Token is expired based on client-side check');
+          // Token expired, no need to verify with server
+          localStorage.removeItem('authToken');
+          console.log('MAIN - Expired token removed from localStorage');
+          updateUIForAuthStatus(false);
+          return;
+        }
+      } else {
+        console.warn('MAIN - Token format is invalid, cannot decode');
+      }
+    } catch (error) {
+      console.error('MAIN - Error decoding token:', error);
+    }
+    
     try {
       // Verify token by getting user profile
+      console.log('MAIN - Verifying token with server by fetching user profile');
       const userData = await api.getProfile();
       
       // User is authenticated
-      console.log('User is authenticated:', userData);
+      console.log('MAIN - User is authenticated successfully:', {
+        userId: userData.data._id,
+        name: userData.data.name,
+        email: userData.data.email,
+        role: userData.data.role
+      });
       
-      // Update UI with user info if needed
-      // For example, show user's name or profile pic
+      // Update UI with user info
+      updateUIForAuthStatus(true, userData.data);
     } catch (error) {
       // Token is invalid or expired
-      console.error('Authentication error:', error);
+      console.error('MAIN - Authentication error during profile fetch:', error);
       localStorage.removeItem('authToken');
+      console.log('MAIN - Invalid token removed from localStorage');
+      
+      // Update UI for non-authenticated state
+      updateUIForAuthStatus(false);
     }
   } else {
     // User is not authenticated
-    console.log('User is not authenticated');
+    console.log('MAIN - No auth token found, user is not authenticated');
     
-    // Update UI for non-authenticated users if needed
+    // Update UI for non-authenticated users
+    updateUIForAuthStatus(false);
+  }
+}
+
+// Helper function to update UI based on authentication status
+function updateUIForAuthStatus(isAuthenticated, userData = null) {
+  console.log('MAIN - Updating UI for auth status:', isAuthenticated);
+  
+  // This function would handle all UI updates based on auth status
+  // For now it's just a placeholder, but in a real implementation
+  // it would:
+  // 1. Show/hide login/register/profile links
+  // 2. Display user name if authenticated
+  // 3. Show admin controls if user has admin role
+  // 4. Adjust what actions are available in the UI
+  
+  // Example implementation:
+  const authLinks = document.querySelectorAll('.auth-required');
+  const guestLinks = document.querySelectorAll('.guest-only');
+  const adminLinks = document.querySelectorAll('.admin-only');
+  const userNameElements = document.querySelectorAll('.user-name');
+  
+  if (authLinks.length > 0) {
+    authLinks.forEach(el => {
+      el.style.display = isAuthenticated ? '' : 'none';
+    });
+    console.log('MAIN - Updated auth-required elements visibility');
+  }
+  
+  if (guestLinks.length > 0) {
+    guestLinks.forEach(el => {
+      el.style.display = isAuthenticated ? 'none' : '';
+    });
+    console.log('MAIN - Updated guest-only elements visibility');
+  }
+  
+  if (isAuthenticated && userData && userData.role === 'admin' && adminLinks.length > 0) {
+    adminLinks.forEach(el => {
+      el.style.display = '';
+    });
+    console.log('MAIN - Displayed admin controls for admin user');
+  } else if (adminLinks.length > 0) {
+    adminLinks.forEach(el => {
+      el.style.display = 'none';
+    });
+  }
+  
+  if (isAuthenticated && userData && userNameElements.length > 0) {
+    userNameElements.forEach(el => {
+      el.textContent = userData.name;
+    });
+    console.log('MAIN - Updated user name in UI elements');
   }
 }

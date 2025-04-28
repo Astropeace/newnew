@@ -32,10 +32,13 @@ exports.register = async (req, res, next) => {
  */
 exports.login = async (req, res, next) => {
   try {
+    console.log('AUTH CONTROLLER - Login attempt:', { email: req.body.email });
+    
     const { email, password } = req.body;
 
     // Validate email & password
     if (!email || !password) {
+      console.log('AUTH CONTROLLER - Login failed: missing email or password');
       return next(new ErrorResponse('Please provide an email and password', 400));
     }
 
@@ -43,19 +46,33 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
+      console.log('AUTH CONTROLLER - Login failed: user not found');
       return next(new ErrorResponse('Invalid credentials', 401));
     }
 
     // Check if password matches
     const isMatch = await user.matchPassword(password);
+    console.log('AUTH CONTROLLER - Password match result:', isMatch);
 
     if (!isMatch) {
+      console.log('AUTH CONTROLLER - Login failed: incorrect password');
       return next(new ErrorResponse('Invalid credentials', 401));
     }
 
+    console.log('AUTH CONTROLLER - Login successful for user:', {
+      userId: user._id,
+      userEmail: user.email,
+      userRole: user.role
+    });
+    
     // Send response with token
     sendTokenResponse(user, 200, res);
   } catch (error) {
+    console.error('AUTH CONTROLLER - Login error:', {
+      errorName: error.name,
+      errorMessage: error.message,
+      stack: error.stack
+    });
     next(error);
   }
 };
@@ -166,26 +183,47 @@ exports.logout = async (req, res, next) => {
  * Helper function to get token from model, create cookie and send response
  */
 const sendTokenResponse = (user, statusCode, res) => {
-  // Create token
-  const token = user.getSignedJwtToken();
+  console.log('AUTH CONTROLLER - Generating token response for user:', {
+    userId: user._id,
+    userRole: user.role,
+    cookieExpirySet: !!process.env.JWT_COOKIE_EXPIRE
+  });
 
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true
-  };
+  try {
+    // Create token
+    const token = user.getSignedJwtToken();
+    console.log('AUTH CONTROLLER - Token generated successfully');
 
-  // Add secure flag in production
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true;
-  }
+    const cookieExpireDays = parseInt(process.env.JWT_COOKIE_EXPIRE) || 7;
+    console.log('AUTH CONTROLLER - Cookie expire days:', cookieExpireDays);
 
-  res
-    .status(statusCode)
-    .cookie('token', token, options)
-    .json({
-      success: true,
-      token
+    const options = {
+      expires: new Date(
+        Date.now() + cookieExpireDays * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true
+    };
+
+    // Add secure flag in production
+    if (process.env.NODE_ENV === 'production') {
+      options.secure = true;
+      console.log('AUTH CONTROLLER - Added secure flag to cookie (production mode)');
+    }
+
+    console.log('AUTH CONTROLLER - Sending token in both cookie and JSON response');
+    
+    res
+      .status(statusCode)
+      .cookie('token', token, options)
+      .json({
+        success: true,
+        token
+      });
+  } catch (error) {
+    console.error('AUTH CONTROLLER - Token response error:', {
+      errorName: error.name,
+      errorMessage: error.message
     });
+    throw error;
+  }
 };

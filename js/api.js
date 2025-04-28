@@ -10,6 +10,7 @@ class ApiClient {
   constructor() {
     this.baseUrl = API_BASE_URL;
     this.token = localStorage.getItem('authToken');
+    console.log('API CLIENT - Initialized with token:', this.token ? 'token exists' : 'no token');
   }
 
   /**
@@ -19,6 +20,7 @@ class ApiClient {
   setToken(token) {
     this.token = token;
     localStorage.setItem('authToken', token);
+    console.log('API CLIENT - Token set and saved to localStorage');
   }
 
   /**
@@ -27,6 +29,7 @@ class ApiClient {
   clearToken() {
     this.token = null;
     localStorage.removeItem('authToken');
+    console.log('API CLIENT - Token cleared from memory and localStorage');
   }
 
   /**
@@ -37,6 +40,7 @@ class ApiClient {
    */
   async request(endpoint, options = {}) {
     const url = `${this.baseUrl}${endpoint}`;
+    console.log(`API CLIENT - Request to ${endpoint}`);
     
     // Add authorization header if token exists
     if (this.token) {
@@ -44,6 +48,9 @@ class ApiClient {
         ...options.headers,
         'Authorization': `Bearer ${this.token}`
       };
+      console.log('API CLIENT - Added authorization header with token');
+    } else {
+      console.log('API CLIENT - No token available for request');
     }
 
     // Add JSON headers for most requests
@@ -54,19 +61,53 @@ class ApiClient {
     }
 
     try {
+      const startTime = Date.now();
+      console.log('API CLIENT - Sending request:', {
+        url,
+        method: options.method || 'GET',
+        hasBody: !!options.body
+      });
+      
       const response = await fetch(url, options);
+      const responseTime = Date.now() - startTime;
       
       // Parse JSON data
       const data = await response.json();
       
       // Handle API errors
       if (!response.ok) {
+        const status = response.status;
+        console.error('API CLIENT - Request failed:', {
+          endpoint,
+          status,
+          responseTime: `${responseTime}ms`,
+          error: data.error,
+          isAuthError: status === 401,
+        });
+
+        // Special handling for authentication errors
+        if (status === 401) {
+          console.error('API CLIENT - Authentication error - token may be invalid or expired');
+          // Currently no token refresh mechanism implemented
+          // This would be a good place to add one
+        }
+        
         throw new Error(data.error || 'Something went wrong');
       }
       
+      console.log('API CLIENT - Request successful:', {
+        endpoint,
+        status: response.status,
+        responseTime: `${responseTime}ms`,
+      });
+      
       return data;
     } catch (error) {
-      console.error('API request failed:', error);
+      console.error('API CLIENT - Request failed with exception:', {
+        endpoint,
+        errorType: error.name,
+        errorMessage: error.message
+      });
       throw error;
     }
   }
@@ -98,17 +139,27 @@ class ApiClient {
    * @returns {Promise} - User data and token
    */
   async login(credentials) {
-    const data = await this.request('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials)
-    });
+    console.log('API CLIENT - Login attempt:', { email: credentials.email });
     
-    // Save token on successful login
-    if (data.token) {
-      this.setToken(data.token);
+    try {
+      const data = await this.request('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(credentials)
+      });
+      
+      // Save token on successful login
+      if (data.token) {
+        console.log('API CLIENT - Login successful, token received');
+        this.setToken(data.token);
+      } else {
+        console.warn('API CLIENT - Login response missing token');
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('API CLIENT - Login failed:', error.message);
+      throw error;
     }
-    
-    return data;
   }
 
   /**
@@ -116,7 +167,22 @@ class ApiClient {
    * @returns {Promise} - User profile data
    */
   async getProfile() {
-    return this.request('/auth/me');
+    console.log('API CLIENT - Fetching user profile');
+    try {
+      const data = await this.request('/auth/me');
+      console.log('API CLIENT - Profile fetched successfully:', {
+        hasData: !!data,
+        dataType: typeof data
+      });
+      return data;
+    } catch (error) {
+      console.error('API CLIENT - Failed to fetch profile:', error.message);
+      // This is where token expiration is often first detected
+      if (error.message.includes('Not authorized')) {
+        console.warn('API CLIENT - Authentication issue detected in getProfile');
+      }
+      throw error;
+    }
   }
 
   /**
@@ -135,8 +201,21 @@ class ApiClient {
    * Logout user
    */
   async logout() {
-    this.clearToken();
-    return this.request('/auth/logout');
+    console.log('API CLIENT - Logout initiated');
+    try {
+      // Note: We clear the token before making the request
+      // This means the logout request itself might fail if the server
+      // strictly requires authentication for the logout endpoint
+      this.clearToken();
+      const result = await this.request('/auth/logout');
+      console.log('API CLIENT - Logout successful on server side');
+      return result;
+    } catch (error) {
+      console.error('API CLIENT - Logout request failed:', error.message);
+      console.log('API CLIENT - Token still cleared locally regardless of server response');
+      // We don't rethrow here since the local logout was still successful
+      return { success: true, message: 'Logged out locally' };
+    }
   }
 
   // Portfolio/Image methods

@@ -60,13 +60,35 @@ userSchema.pre('save', async function(next) {
 
 // Sign JWT and return
 userSchema.methods.getSignedJwtToken = function() {
-  return jwt.sign(
-    { id: this._id, role: this.role },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: process.env.JWT_EXPIRES_IN
-    }
-  );
+  // Log token generation attempt
+  console.log('USER MODEL - JWT Token Generation:', {
+    userId: this._id,
+    userRole: this.role,
+    secretExists: !!process.env.JWT_SECRET,
+    secretLength: process.env.JWT_SECRET ? process.env.JWT_SECRET.length : 0,
+    expiryValue: process.env.JWT_EXPIRES_IN || 'not set'
+  });
+
+  try {
+    const token = jwt.sign(
+      { id: this._id, role: this.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_EXPIRES_IN
+      }
+    );
+    
+    // Log successful token generation
+    console.log('USER MODEL - JWT Token Generated Successfully');
+    
+    return token;
+  } catch (error) {
+    console.error('USER MODEL - JWT Token Generation Failed:', {
+      errorName: error.name,
+      errorMessage: error.message
+    });
+    throw error;
+  }
 };
 
 // Match user entered password to hashed password in database
